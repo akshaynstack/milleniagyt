@@ -26,10 +26,40 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div>Hello Guys</div>
     <div class="experience"></div>
     <div class="credits">
-        My Room in 3D by <a href="https://bruno-simon.com" target="_blank">Bruno Simon</a> (<a href="https://github.com/brunosimon/my-room-in-3d" target="_blank">Source code</a>)
+        <span class="name-yt">Millenia G YT</span> 
+        <button class="btn btn--light">
+            <span class="btn__inner">
+              <span class="btn__slide"></span>
+              <span id="subscriberCount" class="btn__content"></span>
+            </span>
+          </button>
+         <a class="link-for-sub" href="https://www.youtube.com/c/MilleniaG" target="_blank">Subscribe</a>
     </div>
+    <script>
+    
+    const APIKey = 'AIzaSyCvF6ehlPoHHU8KIQxUYuW_sNbrMZW5ZEk';
+    const Userid = 'UCxq17deg60NJwpCaLE88d_A';
+    const subscriberCount= document.getElementById('subscriberCount');
+    const viewCount = document.getElementById('viewCount');
+    const videoCount = document.getElementById('videoCount');
+   
+    let getdata = () => {
+        fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${Userid}&key=${APIKey}`)
+        .then(response => {
+            return response.json()
+        })
+        .then(data => {
+            console.log(data);
+            subscriberCount.innerHTML = data["items"][0].statistics.subscriberCount;
+            viewCount.innerHTML = data["items"][0].statistics.viewCount;
+            videoCount.innerHTML = data["items"][0].statistics.videoCount;
+            
+        })
+    }
+   getdata();
+    </script>
+    
 </body>
 </html>
